@@ -162,6 +162,14 @@ blockquote, q {
 	border-color: #2f736c;
   }
 
+/* Tighter spacing between headings and paragraphs in sections */
+.main h3 { margin: 0 0 0.0em 0; }
+.main h3 + p { margin-top: 0; }
+
+/* Research section spacing tweaks */
+#research .image.fit { margin: 0 0 1em 0; }
+#research .row.gtr-150 > * { margin-bottom: 2em; }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
