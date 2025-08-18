@@ -29,4 +29,39 @@
 	// Scrolly.
 		$('.scrolly').scrolly();
 
+	// Media slider (auto + dots)
+		(function initMediaSlider() {
+			var $slider = $('#media .slider');
+			if (!$slider.length) return;
+			var $slides = $slider.find('.slide');
+			var $dots = $slider.find('.dot');
+			var index = 0;
+			var intervalMs = parseInt($slider.attr('data-interval'), 10) || 6000;
+			var timer;
+
+			function go(to) {
+				index = (to + $slides.length) % $slides.length;
+				$slides.removeClass('is-active').eq(index).addClass('is-active');
+				$dots.removeClass('is-active').eq(index).addClass('is-active');
+			}
+
+			function start() {
+				stop();
+				timer = window.setInterval(function() { go(index + 1); }, intervalMs);
+			}
+
+			function stop() {
+				if (timer) window.clearInterval(timer);
+			}
+
+			$dots.on('click', function() {
+				var to = parseInt($(this).attr('data-index'), 10);
+				go(to);
+				start();
+			});
+
+			$slider.on('mouseenter', stop).on('mouseleave', start);
+			start();
+		})();
+
 })(jQuery);
